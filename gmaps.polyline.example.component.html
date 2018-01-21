@@ -1,0 +1,41 @@
+<gmaps [gmapsDivId]="'gmapsDiv'" [(zoom)]="zoom" [(center)]="center.latLng" 
+    (mapClick)="onGMapsClick($event)" (created)="onGMapsCreation($event)"></gmaps>
+<gmaps-polyline [gmaps]="gmaps" [path]="path" [visible]="path != null"
+    [editable]=true [strokeColor]="'#FFFFFF'" [strokeOpacity]="'0.5'"
+    (mouseOver)="onGMapsPolylineMouseOver($event)"
+    (mouseOut)="onGMapsPolylineMouseOut($event)"></gmaps-polyline>
+<gmaps-polyline *ngFor="let path of paths" [gmaps]="gmaps" [path]="path"
+    [visible]=true [strokeColor]="'#555555'" 
+    [strokeOpacity]="'0.5'"
+    (mouseOver)="onGMapsPolylineMouseOver($polyMouseEvent)"
+    (mouseOut)="onGMapsPolylineMouseOut($polyMouseEvent)"></gmaps-polyline>
+<gmaps-infowindow [gmaps]="gmaps" [content]="'content at'+infoWindowPosition | json"
+    [position]="infoWindowPosition" [open]="infoWindowPosition != null"></gmaps-infowindow>
+
+<input type="button" (click)="createPath()" [disabled]="selected != null"
+       value="Create">
+       <input type="button" (click)="removePath()"
+       value="Remove">
+       <input type="button" (click)="savePath()" [disabled]="path.isEmpty()"
+       value="Save">
+       <table *ngIf="path != null" style="float: right;">
+       <tr>
+        <td>Index
+        </td>
+        <td>Lat
+        </td>
+        <td>Lng
+        </td>
+    </tr>
+    <tr *ngFor="let latLngWrapper of path.array;let i = index">
+        <td>{{i}}</td>
+
+        <!--    Not supported yet -->
+        <!-- 						<td><input type="number" ng-model="latLngWrapper.lat">{{latLngWrapper.lat}}</td> -->
+        <!-- 						<td><input type="number" ng-model="latLngWrapper.lng">{{latLngWrapper.lng}}</td> -->
+        <!-- 			<td><button>Remove</button></td> -->
+
+        <td>{{latLngWrapper.lat}}</td>
+        <td>{{latLngWrapper.lng}}</td>
+    </tr>
+</table>

@@ -1,0 +1,11 @@
+<gmaps [gmapsDivId]="'gmapsDiv'" [(zoom)]="zoom" 
+    [(center)]="latLngWrapper.latLng" (boundsChange)="bounds = $event" 
+    (mapClick)="onGMapsClick($event)" (created)="onGMapsCreation($event)"></gmaps>
+<label>Center Lat</label>
+<input type="number" [(ngModel)]="latLngWrapper.lat">
+<label>Center Lng</label>
+<input type="number" [(ngModel)]="latLngWrapper.lng">
+<label>Zoom</label>
+<input type="number" [(ngModel)]="zoom">
+<br>
+<label>Bounds {{bounds}}</label>

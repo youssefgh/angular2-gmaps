@@ -1,0 +1,13 @@
+<gmaps [gmapsDivId]="'gmapsDiv'" [(zoom)]="zoom"
+    [(center)]="latLngWrapper.latLng" (mapClick)="onGMapsClick($event)"
+    (rightClick)="onGMapsRightClick($event)" (created)="onGMapsCreation($event)"></gmaps>
+<gmaps-marker *ngFor="let latLngWrapperItem of markers; let i = index" 
+    [gmaps]="gmaps" [(position)]="markers[i]" [title]="i.toString()"
+    [draggable]=false (rightClick)="onMarkerRightClick($event)"></gmaps-marker>
+<gmaps-icon [url]="'resources/images/icons/mario.png'" 
+    [scaledSize]="iconScaledSize" (created)="iconCreated($event)"></gmaps-icon>
+<gmaps-marker *ngFor="let latLngWrapperItem of markersWithIcon; let i = index"
+    [gmaps]="gmaps" [(position)]="markersWithIcon[i]" [title]="i.toString()"
+    [draggable]=true (rightClick)="onMarkerWithIconRightClick($event)"
+    [icon]="icon"></gmaps-marker>
+<p>{{markersWithIcon | json}}</p>
